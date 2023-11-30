@@ -22,7 +22,7 @@ Our experiments are conducted on three benchmark datasets collected from Ciao, E
 |   Yelp   |  99,262 | 251,722 |    715,821     |   1,298,522   |
 ## Usage
 
-Please unzip the datasets first. Also you need to create the `History/` and the `Models/` directories. The command lines to train SDR on the three datasets are as below. The un-specified hyperparameters in the commands are set as default.
+Please unzip the datasets first. Also you need to create the `History/`+'dataset_name (e.g,ciao)' and the `Models/`+ 'dataset_name (e.g,ciao)' directories. The command lines to train SDR on the three datasets are as below. The hyperparameters in the commands are set as default.
 
 - Ciao
 
