@@ -40,7 +40,7 @@ def parse_args():
     parser.add_argument('--num_workers',   type=int, default=0)
     parser.add_argument('--save_name', type=str, default='tem')
     parser.add_argument('--checkpoint',    type=str, default="")
-    parser.add_argument('--model_dir',     type=str, default="./Models/yelp/")
+    parser.add_argument('--model_dir',     type=str, default="./Model/yelp/")
    
     # params for the denoiser
     parser.add_argument('--time_type', type=str, default='cat', help='cat or add')
