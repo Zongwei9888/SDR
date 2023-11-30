@@ -40,9 +40,9 @@ def parse_args():
     parser.add_argument('--num_workers',   type=int, default=0)
     parser.add_argument('--save_name', type=str, default='tem')
     parser.add_argument('--checkpoint',    type=str, default="")
-    parser.add_argument('--model_dir',     type=str, default="./Model/yelp/")
+    parser.add_argument('--model_dir',     type=str, default="./Models/yelp/")
    
-    # params for the modelsss
+    # params for the denoiser
     parser.add_argument('--time_type', type=str, default='cat', help='cat or add')
     parser.add_argument('--dims', type=int, default=64, help='the dims for the DNN')
     parser.add_argument('--norm', type=bool, default=True, help='Normalize the input or not')
