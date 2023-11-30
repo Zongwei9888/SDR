@@ -1,5 +1,5 @@
 # Denoised Social Recommender via Diffusion Model (SDR)
-This is the PyTorch-based implementation for DSL model proposed in this paper:
+This is the PyTorch-based implementation for SDR model proposed in this paper:
 >Denoised Social Recommender via Diffusion Model
 ![model](./framework_00.png)
 ## Abstract
