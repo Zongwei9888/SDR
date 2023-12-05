@@ -1,6 +1,6 @@
-# Denoised Social Recommender via Diffusion Model (SDR)
+# Diffusion Model for Social Recommendation (SDR)
 This is the PyTorch-based implementation for SDR model proposed in this paper:
->Denoised Social Recommender via Diffusion Model
+>Diffusion Model for Social Recommendation
 ![model](./framework_00.png)
 ## Abstract
 Social recommendation has emerged as a valuable means to improve personalized recommendation for its strength to enhance user representation learning by leveraging the social connections among users, such as following and friend relations observed in online social platforms. The key assumption of social recommendation is the homophily in preference patterns for socially-connected users. That is, users connected by social ties share similar taste in user-item activities such as rating and purchasing. However, this assumption does not always hold due to the presence of irrelevant and false social ties, which can instead pollute the user embeddings and harm the recommendation accuracy.
