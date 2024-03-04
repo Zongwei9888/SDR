@@ -70,7 +70,7 @@ class DiffusionProcess(nn.Module):
 
     def caculate_losses(self, model, emb_s, reweight=False):
         batch_size, device = emb_s.size(0), emb_s.device
-        ts, pt = self.sample_timesteps(batch_size, device, 'importance')
+        ts, pt = self.sample_timesteps(batch_size, device, 'uniform')
         noise = th.randn_like(emb_s)
         emb_t = self.forward_process(emb_s, ts, noise)
         terms = {}
@@ -92,24 +92,6 @@ class DiffusionProcess(nn.Module):
 
         terms["loss"] = weight * loss
         terms["pred_xstart"] = model_output
-
-        # update Lt_history & Lt_count
-        for t, loss in zip(ts, terms["loss"]):
-            if self.Lt_count[t] == self.keep_num:
-                Lt_record_old = self.Lt_record.clone()
-                self.Lt_record[t, :-1] = Lt_record_old[t, 1:]
-                self.Lt_record[t, -1] = loss.detach()
-            else:
-                try:
-                    self.Lt_record[t, self.Lt_count[t]] = loss.detach()
-                    self.Lt_count[t] += 1
-                except:
-                    print(t)
-                    print(self.Lt_count[t])
-                    print(loss)
-                    raise ValueError
-
-        terms["loss"] /= pt
         return terms
 
     def p_sample(self, model, emb_s, steps, sampling_noise=False):

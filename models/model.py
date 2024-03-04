@@ -159,7 +159,10 @@ class GCNModel(nn.Module):
         ui_embeddings = sum(all_embeddings)
 
         for i, layer in enumerate(self.uu_Layers):
-            embeddings = layer(uugraph, self.embedding_dict['user_emb'])
+            if i == 0:
+                embeddings = layer(uugraph, self.embedding_dict['user_emb'])
+            else:
+                embeddings = layer(uugraph, embeddings)
             norm_embeddings = F.normalize(embeddings, p=2, dim=1)
             all_uu_embeddings +=[norm_embeddings]
         uu_embeddings = sum(all_uu_embeddings)

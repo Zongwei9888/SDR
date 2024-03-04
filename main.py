@@ -117,6 +117,7 @@ class Coach:
         epoch_losses = [0] * 3
         dataloader.dataset.negSampling()
         tqdm_dataloader = tqdm(dataloader)
+        since = time.time()
 
         for iteration, batch in enumerate(tqdm_dataloader):
             user_idx, pos_idx, neg_idx = batch
@@ -156,6 +157,9 @@ class Coach:
             self.scheduler2.step()
 
         epoch_losses = [sum(epoch_losses)] + epoch_losses
+        time_elapsed = time.time() - since
+        print('Training complete in {:.4f}s'.format(
+            time_elapsed ))
         return epoch_losses
 
     def calcRes(self, topLocs, tstLocs, batIds):
@@ -185,9 +189,10 @@ class Coach:
         self.GCNModel.eval()
         Recall, NDCG = [0] * 2
         num = dataloader.dataset.__len__()
-        uiEmbeds, uuEmbeds = self.GCNModel(self.uiGraph, self.uuGraph, True)
-
+       
+        since = time.time()
         with torch.no_grad():
+            uiEmbeds, uuEmbeds = self.GCNModel(self.uiGraph, self.uuGraph, True)
             tqdm_dataloader = tqdm(dataloader)
             for iteration, batch in enumerate(tqdm_dataloader, start=1):
                 user_idx, trnMask = batch
@@ -206,9 +211,14 @@ class Coach:
                 recall, ndcg = self.calcRes(topLocs.cpu().numpy(), dataloader.dataset.tstLocs, user_idx)
                 Recall+= recall
                 NDCG+=ndcg
+            time_elapsed = time.time() - since
+            print('Testing complete in {:.4f}s'.format(
+            time_elapsed ))
             Recall = Recall/num
             NDCG = NDCG/num
         return Recall, NDCG
+
+ 
 
     def saveHistory(self):
         history = dict()
@@ -233,3 +243,4 @@ if __name__ == "__main__":
     handler.LoadData()
     app = Coach(handler)
     app.train()
+    
